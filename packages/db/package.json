@@ -4,20 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "codegen": "tsx scripts/generate.ts",
+    "gen": "DATABASE_URL=postgresql://root:root@127.0.0.1:10000/hospital drizzle-kit generate --config src/drizzle.config.ts --name",
+    "local": "DATABASE_URL=postgresql://root:root@127.0.0.1:10000/hospital ./scripts/recreate-local-db",
+    "migrate": "DOTENV_CONFIG_PATH=.env tsx -r dotenv/config src/migrate.ts",
+    "migrate:prod": "DOTENV_CONFIG_PATH=.env tsx -r dotenv/config src/migrate.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.7",
-    "drizzle-orm": "^0.38.3",
+    "drizzle-orm": "0.34.1",
     "pg": "^8.13.1"
   },
   "devDependencies": {
-    "@types/node": "^22.10.5",
     "@types/pg": "^8.11.10",
-    "drizzle-kit": "^0.30.1",
+    "drizzle-kit": "0.30.2",
+    "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.2"
   }
 }

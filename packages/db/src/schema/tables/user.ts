@@ -12,6 +12,9 @@ export const User = pgTable('User', {
   id: serial().primaryKey(),
   name: varchar({ length: 64 }).unique().notNull(),
   uid: varchar({ length: 64 }).unique().notNull(),
+  personUid: varchar()
+    .references(() => Person.uid)
+    .notNull(),
   password: varchar({ length: 512 }).notNull(),
   salt: varchar({ length: 512 }).notNull(),
   createdAt: timestamp({ withTimezone: false }).defaultNow().notNull(),
@@ -23,7 +26,10 @@ export const User = pgTable('User', {
 })
 
 export const usersRelations = relations(User, ({ one }) => ({
-  person: one(Person),
+  person: one(Person, {
+    fields: [User.personUid],
+    references: [Person.uid],
+  }),
 }))
 
 export type UserRecord = typeof User.$inferSelect

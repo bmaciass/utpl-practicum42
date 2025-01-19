@@ -1,0 +1,6 @@
+#!/bin/sh
+psql -d "postgres://root:root@127.0.0.1:10000/postgres" -c "DROP DATABASE hospital;"
+psql -d "postgres://root:root@127.0.0.1:10000/postgres" -c "CREATE DATABASE hospital;"
+
+pnpm --filter db migrate
+# pnpm --filter seeders seed:local

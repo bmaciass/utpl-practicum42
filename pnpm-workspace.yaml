@@ -1,4 +1,4 @@
 packages:
   - "packages/db"
-  - "packages/api/admin"
-  - "packages/ui/admin"
+  - "packages/admin-api"
+  - "packages/admin-ui"
